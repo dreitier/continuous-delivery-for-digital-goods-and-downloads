@@ -1,0 +1,31 @@
+name: Run tests on branch commit
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    name: Run unit tests
+    strategy:
+      matrix:
+        php: [ "8.0", "8.1" ]
+        phpunit: [ "9.5.10" ]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: php-actions/composer@v6
+
+    - uses: michaelw90/PHP-Lint@master
+
+    - name: PHPUnit test
+      uses: php-actions/phpunit@v2
+      with:
+        php_version: ${{ matrix.php }}
+        version: ${{ matrix.phpunit }}
+        php_extensions: ldap mbstring
+        configuration: phpunit.xml
+        args: --coverage-text --verbose

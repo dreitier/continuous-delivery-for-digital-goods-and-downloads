@@ -1,0 +1,24 @@
+/.distignore
+/.git
+/.github
+/.gitattributes
+/.gitignore
+/.idea
+/.wordpress-org
+/.generatedJUnitFiles
+/.phplint.yml
+/build
+/docker_tag export-ignore
+/output.log
+/Jenkinsfile
+/phpdox.xml
+/phpmd.xml
+/phpunit.xml
+/README.md
+/build.xml
+/logs/.gitignore
+/logs/debug.log
+/test-ui
+/test
+/vendor
+/vendor-repackaged/bin

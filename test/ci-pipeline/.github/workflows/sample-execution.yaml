@@ -1,0 +1,48 @@
+name: Create new release
+
+# on: [pull_request]
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: upload
+        uses: hkusu/s3-upload-action@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
+          aws-bucket: ${{ secrets.AWS_BUCKET }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          file-path: ./file-to-upload.txt
+          destination-dir: /continuous-delivery/v1
+          output-file-url: 'true'
+
+      - name: Show uploaded file path
+        id: debug
+        run: | 
+          echo '${{ steps.upload.outputs.file-url }}'
+          echo '${{ steps.upload.outputs.result }}'
+
+      - name: Release in WordPress
+        id: release
+        run: |
+          response=$(curl --insecure -XPOST -i \
+          -H 'Accept: application/json' \
+          -H 'Content-Type: application/json' \
+          --user "${{ secrets.CD_FOR_DOWNLOADS_USERNAME }}:${{ secrets.CD_FOR_DOWNLOADS_APPLICATION_PASSWORD }}" \
+          -d '{
+              "artifact_url": "${{ env.ARTIFACT_URL }}",
+              "signatures": { "sha256": "some-custom-sha" },
+              "release": { "version": "${{ env.CD_FOR_DOWNLOADS_VERSION }}"},
+              "meta": {
+                "readme": "This is a meta field"
+              }
+            }' \
+          "${{ env.CD_FOR_DOWNLOADS_API_ENDPOINT }}/products/${{ env.CD_FOR_DOWNLOADS_PRODUCT_ID }}/release")
+          
+          echo "Response: $response"
+        env:
+          # nektos/act bug: https://github.com/nektos/act/issues/1421
+          # url: ${{ steps.upload.outputs.file-url }}
+          ARTIFACT_URL: https://continuous-delivery-for-digital-goods-test.s3.eu-central-1.amazonaws.com/artifacts/continuous-delivery/v1/file-to-upload.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=***%2F20221203%2F***%2Fs3%2Faws4_request&X-Amz-Date=20221203T121924Z&X-Amz-Expires=86400&X-Amz-Signature=95ff7a244c2c67ff89179fc32c357b42f45ccd7e3f30accd79172a91cf109649&X-Amz-SignedHeaders=host
