@@ -11,15 +11,13 @@ jobs:
     name: Run unit tests
     strategy:
       matrix:
-        php: [ "8.0", "8.1" ]
+        php: [ "8.1" ]
         phpunit: [ "9.5.10" ]
 
     steps:
     - uses: actions/checkout@v2
 
     - uses: php-actions/composer@v6
-
-    - uses: michaelw90/PHP-Lint@master
 
     - name: PHPUnit test
       uses: php-actions/phpunit@v2

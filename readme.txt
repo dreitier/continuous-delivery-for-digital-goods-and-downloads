@@ -7,7 +7,7 @@ Stable tag: REPLACE_VERSION_BY_CI
 License: The MIT License (MIT)
 License URI: https://opensource.org/licenses/MIT
 Donate link: https://dreitier.com
-Requires PHP: 8.0
+Requires PHP: 8.1
 
 *Continuous Delivery for Digital Goods and Downloads* expands your WordPress download portal to a fully-fledged Continuous Delivery pipeline.
 
