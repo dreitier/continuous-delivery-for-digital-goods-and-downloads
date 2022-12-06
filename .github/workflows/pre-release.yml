@@ -60,7 +60,7 @@ jobs:
         vendor/bin/phpstan analyse
 
     - name: Zip all files
-      run: zip -r release.zip . -x ".git/*" ".github/*" -x "vendor/* -x test/* -x phpstan*"
+      run: zip -r release.zip . -x ".git/*" -x ".github/*" -x "vendor/*" -x "test/*" -x "phpstan*"
 
     - name: Upload pre-release to GitHub
       uses: ncipollo/release-action@v1
