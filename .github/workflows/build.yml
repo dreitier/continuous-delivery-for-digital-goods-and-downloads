@@ -19,6 +19,11 @@ jobs:
 
     - uses: php-actions/composer@v6
 
+    - name: PHPStan
+      id: phpstan
+      run: |
+        vendor/bin/phpstan analyse
+
     - name: PHPUnit test
       uses: php-actions/phpunit@v2
       with:

@@ -34,7 +34,7 @@ class PlugIn
 		$s3ConfigurationManager = new ConfigurationManager($s3FileReferenceFactory, new class implements ConfigurationResolver {
 			public function __invoke(S3FileReference $s3FileReference): ?Configuration
 			{
-				$options = \get_option(Plugin::OPTIONS_PREFIX);
+				$options = \get_option(PlugIn::OPTIONS_PREFIX);
 
 				if (!is_array($options) || !isset($options['buckets'])) {
 					return null;

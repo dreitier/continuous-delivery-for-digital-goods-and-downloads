@@ -92,13 +92,13 @@ class DownloadMonitor
 				'order' => 'DESC'
 			));
 
-		// fall back to to previous uploaded files URLs
+		// fall back to previous uploaded files URLs
 		if (sizeof($availableVersions) > 0) {
 			$last_version_id = $availableVersions[0]->ID;
 			$url_json = get_post_meta($last_version_id, '_files', true);
 
 			if (!empty($url_json)) {
-				$urls = json_decode($url_json, JSON_UNESCAPED_UNICODE);
+				$urls = json_decode($url_json, true, 512, JSON_UNESCAPED_UNICODE);
 
 				if (is_array($urls) && (sizeof($urls) > 0)) {
 					$url = $urls[0];
@@ -282,6 +282,7 @@ class DownloadMonitor
 				$version->menu_order = 0;
 			}
 
+			// @phpstan-ignore-next-line
 			wp_update_post($version);
 		}
 	}

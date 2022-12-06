@@ -1,0 +1,10 @@
+parameters:
+    level: 5
+    paths:
+    	- src
+    bootstrapFiles:
+        - phpstan.stubs.php
+        - autoload.php
+
+includes:
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon

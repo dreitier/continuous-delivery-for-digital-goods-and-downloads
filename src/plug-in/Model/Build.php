@@ -16,7 +16,7 @@ class Build
 		];
 	}
 
-	public static function fromMap($map): ?Scm
+	public static function fromMap($map): ?Build
 	{
 		if (!$map) {
 			return null;

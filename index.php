@@ -12,11 +12,7 @@
 
 use Dreitier\WordPress\ContinuousDelivery\Ui\AdminPage;
 
-// required to use S3 client - AWS S3 has too much dependencies
-define('AKEEBAENGINE', true);
-
-require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/vendor-repackaged/autoload.php';
+require_once __DIR__ . '/autoload.php';
 
 add_action("plugins_loaded", function () {
 	(new \Dreitier\WordPress\ContinuousDelivery\PlugIn())->init();

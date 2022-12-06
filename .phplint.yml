@@ -1,6 +1,0 @@
-path: ./
-extensions:
-  - php
-exclude:
-  - vendor
-warning: true

@@ -46,9 +46,9 @@ class AdminPage
 
 			<form method="post" action="options.php">
 				<?php
-				settings_fields('continuous_delivery_option_group');
-				do_settings_sections('continuous_delivery-admin');
-				submit_button();
+				\settings_fields('continuous_delivery_option_group');
+				\do_settings_sections('continuous_delivery-admin');
+				\submit_button();
 				?>
 			</form>
 		</div>
@@ -56,7 +56,7 @@ class AdminPage
 
 	public function page_init()
 	{
-		register_setting(
+		\register_setting(
 				'continuous_delivery_option_group', // option_group
 				'continuous_delivery', // option_name
 				array($this, 'sanitize') // sanitize_callback
@@ -70,20 +70,20 @@ class AdminPage
 				'secret_access_key' => ''
 		];
 
-		$this->options = get_option('continuous_delivery');
+		$this->options = \get_option('continuous_delivery');
 		$useBuckets = array_merge(isset($this->options['buckets']) ? $this->options['buckets'] : [], [$defaultBucket]);
 
 		for ($i = 0; $i < sizeof($useBuckets); $i++) {
 			$bucket = $useBuckets[$i];
 
-			add_settings_section(
+			\add_settings_section(
 					'continuous_delivery_setting_section_' . $i, // id
 					isset($bucket['is_new']) ? 'Add new bucket' : 'Bucket #' . ($i + 1), // title
 					array($this, 'section_info'), // callback
 					'continuous_delivery-admin' // page
 			);
 
-			add_settings_field(
+			\add_settings_field(
 					'continuous_delivery_bucket_name_' . $i, // id
 					'Bucket Name', // title
 					function () use ($bucket, $i) {
@@ -92,7 +92,8 @@ class AdminPage
 					'continuous_delivery-admin', // page
 					'continuous_delivery_setting_section_' . $i // section
 			);
-			add_settings_field(
+
+			\add_settings_field(
 					'continuous_delivery_region_' . $i, // id
 					'AWS Region', // title
 					function () use ($bucket, $i) {
@@ -101,7 +102,8 @@ class AdminPage
 					'continuous_delivery-admin', // page
 					'continuous_delivery_setting_section_' . $i // section
 			);
-			add_settings_field(
+
+			\add_settings_field(
 					'continuous_delivery_access_key_' . $i, // id
 					'Access Key', // title
 					function () use ($bucket, $i) {
@@ -110,7 +112,8 @@ class AdminPage
 					'continuous_delivery-admin', // page
 					'continuous_delivery_setting_section_' . $i // section
 			);
-			add_settings_field(
+
+			\add_settings_field(
 					'continuous_delivery_secret_access_key_' . $i, // id
 					'Secret Access Key', // title
 					function () use ($bucket, $i) {
@@ -125,7 +128,7 @@ class AdminPage
 	private function bucket_configuration_value($idx, $key, $default = '')
 	{
 		if (!$this->options) {
-			$this->options = get_option('continuous_delivery');
+			$this->options = \get_option('continuous_delivery');
 		}
 
 		if (is_array($this->options['buckets']) && isset($this->options['buckets'][$idx][$key])) {
@@ -169,7 +172,7 @@ class AdminPage
 	{
 		printf(
 				'<input class="regular-text" type="text" name="continuous_delivery[buckets][%d][bucket_name]" id="continuous_delivery_bucket_name_%d"  value="%s">',
-				$idx, $idx, isset($bucket['bucket_name']) ? esc_attr($bucket['bucket_name']) : ''
+				$idx, $idx, isset($bucket['bucket_name']) ? \esc_attr($bucket['bucket_name']) : ''
 		);
 	}
 
@@ -177,7 +180,7 @@ class AdminPage
 	{
 		printf(
 				'<input class="regular-text" type="text" name="continuous_delivery[buckets][%d][region]" id="continuous_delivery_region_%d" value="%s">',
-				$idx, $idx, isset($bucket['region']) ? esc_attr($bucket['region']) : ''
+				$idx, $idx, isset($bucket['region']) ? \esc_attr($bucket['region']) : ''
 		);
 	}
 

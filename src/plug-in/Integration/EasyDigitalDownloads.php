@@ -2,13 +2,10 @@
 
 namespace Dreitier\WordPress\ContinuousDelivery\Integration;
 
-use Akeeba\Engine\Postproc\Connector\S3v4\Connector;
-use Dreitier\Util\Exception;
 use Dreitier\WordPress\ContinuousDelivery\Event\PublishRequest;
 use Dreitier\WordPress\ContinuousDelivery\Event\Published;
 use Dreitier\WordPress\ContinuousDelivery\Event\UpdateReleaseProperty;
 use Dreitier\WordPress\ContinuousDelivery\PlugIn;
-use Dreitier\WordPress\ContinuousDelivery\ReleaseException;
 use Dreitier\WordPress\ContinuousDelivery\Storage\S3\ConfigurationManager;
 use Dreitier\WordPress\ContinuousDelivery\Storage\S3\S3FileReference;
 use Dreitier\WordPress\ContinuousDelivery\Storage\S3\UnsupportedS3Uri;
@@ -36,21 +33,22 @@ class EasyDigitalDownloads
 	 * @param $downloads
 	 * @param $email
 	 * @param $payment
-	 * @return mixed|void
 	 */
-	public function s3_download_redirect($requested_file_url, $downloads, $email, $payment)
+	public function s3_download_redirect($requested_file_url, $downloads, $email, $payment): void
 	{
 		try {
 			$this->s3ConfigurationManager->sendRedirect($requested_file_url);
 		} catch (UnsupportedS3Uri $e) {
 			// the given file's URI is not handled by our plug-in, e.g. if it is available local or not in one of our buckets.
 			// therefore, proceed with other filters.
+			return;
+			// @phpstan-ignore-next-line
 		} catch (\Exception $e) {
 			// we cannot recover from here
 			wp_die($e->getMessage());
 		}
 
-		return $requested_file_url;
+		return;
 	}
 
 	public function publish(?Published $releaseAlreadyPublished, \WP_Post $productPost, PublishRequest $publish): ?Published
@@ -64,7 +62,7 @@ class EasyDigitalDownloads
 
 		$eddDownloadAsPost = $productPost;
 
-		$download = edd_get_download($publish->product);
+		$download = \edd_get_download($publish->product);
 		$files = $download->get_files();
 
 		$versionFoundAtIndex = null;

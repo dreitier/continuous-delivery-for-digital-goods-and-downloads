@@ -61,7 +61,7 @@ class PublishRequest
 			throw new ReleaseException('missing_release_property', 'Property .release is missing', 400);
 		}
 
-		$args['release'] = Release::fromMap($content['release'] ?? null);
+		$args['release'] = Release::fromMap($content['release']);
 		$args['build'] = Build::fromMap($content['build'] ?? null);
 		$args['scm'] = Scm::fromMap($content['scm'] ?? null);
 		$args['signatures'] = Signatures::fromMap($content['signatures'] ?? null);

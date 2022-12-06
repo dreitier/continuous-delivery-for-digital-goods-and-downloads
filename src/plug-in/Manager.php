@@ -99,9 +99,9 @@ class Manager
 			return $previousResult;
 		}
 
-		$user = wp_get_current_user();
+		$user = \wp_get_current_user();
 
-		if ($user) {
+		if ($user !== null) {
 			$allowRoles = ['administrator', 'deployer'];
 			$roles = (array)$user->roles;
 
@@ -127,9 +127,9 @@ class Manager
 			return $previousResult;
 		}
 
-		$user = wp_get_current_user();
+		$user = \wp_get_current_user();
 
-		if ($user && in_array($user->name, ['admin', 'administrator', 'deployer'])) {
+		if ($user !== null && in_array($user->user_login, ['admin', 'administrator', 'deployer'])) {
 			return true;
 		}
 

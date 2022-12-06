@@ -50,6 +50,11 @@ jobs:
         find: "REPLACE_VERSION_BY_CI"
         replace: ${{ env.CURRENT_TAG }}
 
+    - name: PHPStan
+      id: phpstan
+      run: |
+        vendor/bin/phpstan analyse
+
     - name: Zip all files
       run: zip -r release.zip . -x ".git/*" ".github/*" -x "vendor/*"
 

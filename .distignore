@@ -22,3 +22,5 @@
 /test
 /vendor
 /vendor-repackaged/bin
+/phpstan.neon
+/stubs.phpstan.php
