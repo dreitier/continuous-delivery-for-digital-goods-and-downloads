@@ -50,8 +50,8 @@ jobs:
     - name: Replace version string
       uses: jacobtomlinson/gha-find-replace@master
       with:
-        find: "REPLACE_VERSION_BY_CI"
-        replace: ${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}
+        find: "@VERSION@"
+        replace: ${{ steps.vars.outputs.tag }}
 
     - name: PHPStan
       id: phpstan

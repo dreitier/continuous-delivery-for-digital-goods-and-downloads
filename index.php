@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: Continuous Delivery for Digital Goods and Downloads
- * Plugin URI: https://dreitier.com
+ * Plugin URI: https://github.com/dreitier/continuous-delivery-for-digital-goods-and-downloads
  * Description: Continuous Delivery for Downloads expands your download portal to a fully-fledged Continuous Delivery pipeline.
- * Version: REPLACE_VERSION_BY_CI
+ * Version: @VERSION@
  * Author: dreitier GmbH
  * Author URI: https://dreitier.com
  * License: The MIT License (MIT)

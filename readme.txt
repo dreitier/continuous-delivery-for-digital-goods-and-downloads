@@ -3,7 +3,7 @@ Contributors: dreitier,schakko
 Tags: download,downloads,software,release,management,package,continuous,delivery,integration,automation,digital,goods
 Requires at least: 5.6
 Tested up to: 6.1
-Stable tag: REPLACE_VERSION_BY_CI
+Stable tag: @VERSION@
 License: The MIT License (MIT)
 License URI: https://opensource.org/licenses/MIT
 Donate link: https://dreitier.com
@@ -25,7 +25,7 @@ Previously uploaded files to AWS S3 can be published in Easy Digital Downloads o
 === Requirements ==
 
 * WordPress since 6.0
-* PHP >= 8.0
+* PHP >= 8.1
 * Easy Digital Downloads or Download Monitor
 
 == Frequently Asked Questions ==
@@ -42,8 +42,6 @@ Please read the [FAQ](https://dreitier.github.io/continuous-delivery-for-digital
 == Changelog ==
 
 For detailed information you can visit the official [GitHub repository of Continuous Delivery for Digital Goods and Downloads](https://github.com/dreitier/continuous-delivery-for-digital-goods-and-downloads)
-
-= UNRELEASED =
 
 = 1.0.0 =
 * CHANGED: initial release
