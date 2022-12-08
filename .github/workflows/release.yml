@@ -58,8 +58,11 @@ jobs:
       run: |
         vendor/bin/phpstan analyse
 
+    - name: Zip all files
+      run: zip -r ${{ steps.vars.outputs.tag }}-continuous-delivery.zip . -x ".git/*" -x ".github/*" -x "vendor/*" -x "test/*" -x "phpstan*"
+
     - name: Upload Release
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "continuous-delivery.zip"
+        artifacts: "${{ steps.vars.outputs.tag }}-continuous-delivery.zip"
         token: ${{ secrets.GITHUB_TOKEN }}
