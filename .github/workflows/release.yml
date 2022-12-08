@@ -58,8 +58,18 @@ jobs:
       run: |
         vendor/bin/phpstan analyse
 
+    - name: WordPress Plugin Deploy
+      uses: schakko/action-wordpress-plugin-deploy@develop
+      with:
+        generate-zip: true
+        dry-run: false
+      env:
+        SVN_USERNAME: ${{ secrets.WORDPRESS_ORG_SVN_USERNAME }}
+        SVN_PASSWORD: ${{ secrets.WORDPRESS_ORG_SVN_PASSWORD }}
+        SLUG: continuous-delivery
+
     - name: Zip all files
-      run: zip -r ${{ steps.vars.outputs.tag }}-continuous-delivery.zip . -x ".git/*" -x ".github/*" -x "vendor/*" -x "test/*" -x "phpstan*"
+      run: zip -r ${{ steps.vars.outputs.tag }}-continuous-delivery.zip . -x ".git/*" -x ".github/*" -x "vendor/*" -x "test/*" -x "phpstan*" -x ".wordpress-org/*"
 
     - name: Upload Release
       uses: ncipollo/release-action@v1

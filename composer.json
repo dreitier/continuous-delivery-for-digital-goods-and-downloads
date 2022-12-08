@@ -1,44 +1,63 @@
 {
-  "require-dev": {
-	"10up/wp_mock": "0.4.2",
-	"mockery/mockery": "1.0",
-	"phpunit/phpunit": "9.5.10",
-	"brianhenryie/strauss": "^0.11.1",
-    "phpstan/phpstan": "^1.9",
-    "szepeviktor/phpstan-wordpress": "^1.1"
-  },
-  "require": {
-	"monolog/monolog": "^1.0",
-    "akeeba/s3": "^1.0"
-  },
-  "scripts": {
-	"strauss": [
-	  "vendor/bin/strauss"
-	],
-	"post-install-cmd": [
-	  "@strauss"
-	],
-	"post-update-cmd": [
-	  "@strauss"
-	]
-  },
-  "autoload": {
-	"psr-4": {
-	  "Dreitier\\": "src/shared",
-	  "Dreitier\\WordPress\\ContinuousDelivery\\": "src/plug-in"
-	}
-  },
-  "extra": {
-	"strauss": {
-	  "target_directory": "vendor-repackaged",
-	  "namespace_prefix": "Dreitier\\WordPress\\ContinuousDelivery\\Vendor",
-	  "classmap_prefix": "Dreitier_WordPress_ContinuousDelivery_Vendor_",
-	  "constant_prefix": "DREITIER_WORDPRESS_CONTINUOUSDELIVERY_VENDOR_"
-	}
-  },
-  "config": {
-    "allow-plugins": {
-      "composer/installers": true
+    "name": "dreitier/wordpress-continuous-delivery",
+    "type": "library",
+    "description": "Continuous Delivery for Digital Goods and Downloads extends your digital goods shop into a fully-fledged Continuous Delivery pipeline.",
+    "keywords": [
+		"wordpress",
+        "download",
+		"downloads",
+		"software",
+		"release",
+		"management",
+		"package",
+		"continuous",
+		"delivery",
+		"integration",
+		"automation",
+		"digitalgoods"
+    ],
+    "homepage": "https://github.com/dreitier/continuous-delivery-for-digital-goods-and-downloads/",
+    "license": "MIT",
+    "require-dev": {
+        "10up/wp_mock": "0.4.2",
+        "mockery/mockery": "1.0",
+        "phpunit/phpunit": "9.5.10",
+        "brianhenryie/strauss": "^0.11.1",
+        "phpstan/phpstan": "^1.9",
+        "szepeviktor/phpstan-wordpress": "^1.1"
+    },
+    "require": {
+        "monolog/monolog": "^1.0",
+        "akeeba/s3": "^1.0"
+    },
+    "scripts": {
+        "strauss": [
+            "vendor/bin/strauss"
+        ],
+        "post-install-cmd": [
+            "@strauss"
+        ],
+        "post-update-cmd": [
+            "@strauss"
+        ]
+    },
+    "autoload": {
+        "psr-4": {
+            "Dreitier\\": "src/shared",
+            "Dreitier\\WordPress\\ContinuousDelivery\\": "src/plug-in"
+        }
+    },
+    "extra": {
+        "strauss": {
+            "target_directory": "vendor-repackaged",
+            "namespace_prefix": "Dreitier\\WordPress\\ContinuousDelivery\\Vendor",
+            "classmap_prefix": "Dreitier_WordPress_ContinuousDelivery_Vendor_",
+            "constant_prefix": "DREITIER_WORDPRESS_CONTINUOUSDELIVERY_VENDOR_"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
     }
-  }
 }
