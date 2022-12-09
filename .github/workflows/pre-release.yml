@@ -56,5 +56,5 @@ jobs:
         with:
           artifacts:  ${{ steps.zip_variables.outputs.zip_file }}
           allowUpdates: true
-          tag: ${{ steps.variables.outputs.version }}
+          tag: ${{ needs.variables.outputs.version }}
           token: ${{ secrets.GITHUB_TOKEN }}
