@@ -11,9 +11,9 @@ class AccessibleS3File
 	{
 	}
 
-	public function createUrl($lifetime = 60): string
+	public function createUrl(int $lifetime = 60, bool $useHttps = true): string
 	{
 		$connector = $this->configuration->toConnector();
-		return $connector->getAuthenticatedURL($this->fileReference->bucketName, $this->fileReference->path, $lifetime);
+		return $connector->getAuthenticatedURL($this->fileReference->bucketName, $this->fileReference->path, $lifetime, $useHttps);
 	}
 }
