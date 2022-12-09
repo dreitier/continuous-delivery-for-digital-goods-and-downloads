@@ -7,13 +7,13 @@
 /.wordpress-org export-ignore
 /.generatedJUnitFiles export-ignore
 /build export-ignore
+/DOCKER_ENV export-ignore
 /docker_tag export-ignore
 /output.log export-ignore
 /phpunit.xml export-ignore
 /README.md export-ignore
 /test export-ignore
-/phpstan.neon export-ignore
-/stubs.phpstan.php export-ignore
+/phpstan* export-ignore
 
 * text eol=lf
 *.png binary

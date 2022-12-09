@@ -43,7 +43,7 @@ Please read the [FAQ](https://dreitier.github.io/continuous-delivery-for-digital
 
 For detailed information you can visit the official [GitHub repository of Continuous Delivery for Digital Goods and Downloads](https://github.com/dreitier/continuous-delivery-for-digital-goods-and-downloads)
 
-= 1.0.0 =
+= 1.0.1 =
 * CHANGED: initial release
 
 == Upgrade Notice ==
