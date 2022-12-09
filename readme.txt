@@ -1,6 +1,6 @@
 ﻿=== Continuous Delivery for Digital Goods and Downloads ===
 Contributors: dreitier,schakko,dreitierci
-Tags: download,downloads,software,release,management,package,continuous,delivery,integration,automation,digital,goods
+Tags: download,software,continuous,delivery,package,automation,digital,goods
 Requires at least: 5.6
 Tested up to: 6.1
 Stable tag: @VERSION@
