@@ -15,7 +15,7 @@ jobs:
     uses: dreitier/github-workflows/.github/workflows/variables.yml@main
     with:
       package: continuous-delivery
-      is_official_release: false
+      is_official_release: true
 
   package_and_deploy:
     name: Package and deploy
@@ -33,7 +33,7 @@ jobs:
     - name: Set job variables
       id: zip_variables
       run: |
-        echo "::set-output name=zip_file::${ARTIFACT_NAME}.zip"
+        echo "zip_file=${ARTIFACT_NAME}.zip"  >> $GITHUB_OUTPUT
       env:
         ARTIFACT_NAME: ${{ needs.variables.outputs.artifact_name }}
 

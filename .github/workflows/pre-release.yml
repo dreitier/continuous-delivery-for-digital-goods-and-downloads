@@ -33,7 +33,7 @@ jobs:
       - name: Set job variables
         id: zip_variables
         run: |
-          echo "::set-output name=zip_file::${ARTIFACT_NAME}.zip"
+          echo "zip_file=${ARTIFACT_NAME}.zip"  >> $GITHUB_OUTPUT
         env:
           ARTIFACT_NAME: ${{ needs.variables.outputs.artifact_name }}
 
