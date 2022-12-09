@@ -5,9 +5,6 @@ on:
       - main
       - develop
 
-env:
-  PACKAGE: continuous-delivery
-
 jobs:
   build_and_test:
     uses: ./.github/workflows/build_and_test.yml
@@ -28,7 +25,7 @@ jobs:
   variables:
     uses: dreitier/github-workflows/.github/workflows/variables.yml@main
     with:
-      package: ${{ env.PACKAGE }}
+      package: continuous-delivery
       is_official_release: false
 
   package:
