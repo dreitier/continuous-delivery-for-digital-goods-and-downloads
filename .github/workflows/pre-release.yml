@@ -5,16 +5,16 @@ on:
       - main
       - develop
 
+env:
+  PACKAGE: continuous-delivery
+
 jobs:
   build_and_test:
     uses: ./.github/workflows/build.yml
 
-  prerelease:
+  checkout:
     runs-on: ubuntu-latest
-    needs: testing
-    name: Create pre-release
-    env:
-      PACKAGE: continuous-delivery
+    needs: build_and_test
 
     steps:
       - uses: actions/checkout@v2
@@ -25,14 +25,14 @@ jobs:
           # we exclude the then-unnecessary vendor/ directory in the "Zip all files" step.
           dev: yes
 
-      - uses: dreitier/github-workflows/.github/workflows/variables.yml@main
-        id: variables
-        with:
-          package: ${{ env.PACKAGE }}
-          is_official_release: false
+  variables:
+    uses: dreitier/github-workflows/.github/workflows/variables.yml@main
+    with:
+      package: ${{ env.PACKAGE }}
+      is_official_release: false
 
-      - uses: dreitier/github-workflows/.github/workflows/package.yml@main
-        id: packaging
-        with:
-          artifact_name: ${{ steps.variables.outputs.artifact_name }}
-          version: ${{ steps.variables.outputs.version }}
+  package:
+    uses: dreitier/github-workflows/.github/workflows/package.yml@main
+    with:
+      artifact_name: ${{ needs.variables.outputs.artifact_name }}
+      version: ${{ needs.variables.outputs.version }}
