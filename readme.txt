@@ -1,5 +1,5 @@
 ﻿=== Continuous Delivery for Digital Goods and Downloads ===
-Contributors: dreitier,schakko
+Contributors: dreitier,schakko,dreitierci
 Tags: download,downloads,software,release,management,package,continuous,delivery,integration,automation,digital,goods
 Requires at least: 5.6
 Tested up to: 6.1
@@ -43,7 +43,7 @@ Please read the [FAQ](https://dreitier.github.io/continuous-delivery-for-digital
 
 For detailed information you can visit the official [GitHub repository of Continuous Delivery for Digital Goods and Downloads](https://github.com/dreitier/continuous-delivery-for-digital-goods-and-downloads)
 
-= 1.0.1 =
+= 1.0.2 =
 * CHANGED: initial release
 
 == Upgrade Notice ==
