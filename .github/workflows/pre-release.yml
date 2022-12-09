@@ -10,7 +10,7 @@ env:
 
 jobs:
   build_and_test:
-    uses: ./.github/workflows/build.yml
+    uses: ./.github/workflows/build_and_test.yml
 
   checkout:
     runs-on: ubuntu-latest
