@@ -23,12 +23,14 @@ jobs:
           dev: yes
 
   variables:
+    needs: checkout
     uses: dreitier/github-workflows/.github/workflows/variables.yml@main
     with:
       package: continuous-delivery
       is_official_release: false
 
   package:
+    needs: variables
     uses: dreitier/github-workflows/.github/workflows/package.yml@main
     with:
       artifact_name: ${{ needs.variables.outputs.artifact_name }}
