@@ -35,7 +35,7 @@ class Release
 
 	public static function fromMap($map): Release
 	{
-		if (!isset($map['version'])) {
+		if (!isset($map['version']) || empty($map['version'])) {
 			throw new ReleaseException('missing_release_version_property', 'Property .release.version is missing', 400);
 		}
 
