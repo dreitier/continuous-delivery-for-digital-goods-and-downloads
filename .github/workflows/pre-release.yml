@@ -7,9 +7,11 @@ on:
 
 jobs:
   build_and_test:
+    name: Build and Test
     uses: ./.github/workflows/build_and_test.yml
 
   variables:
+    needs: build_and_test
     name: Detect Git and release variables
     uses: dreitier/github-workflows/.github/workflows/variables.yml@main
     with:
@@ -54,5 +56,5 @@ jobs:
         with:
           artifacts:  ${{ steps.zip_variables.outputs.zip_file }}
           allowUpdates: true
-          tag: ${{ inputs.version }}
+          tag: ${{ steps.variables.outputs.version }}
           token: ${{ secrets.GITHUB_TOKEN }}
