@@ -9,10 +9,16 @@ jobs:
   build_and_test:
     uses: ./.github/workflows/build_and_test.yml
 
-  checkout:
-    runs-on: ubuntu-latest
-    needs: build_and_test
+  variables:
+    name: Detect Git and release variables
+    uses: dreitier/github-workflows/.github/workflows/variables.yml@main
+    with:
+      package: continuous-delivery
+      is_official_release: false
 
+  package_and_deploy:
+    runs-on: ubuntu-latest
+    needs: variables
     steps:
       - uses: actions/checkout@v2
 
@@ -22,16 +28,31 @@ jobs:
           # we exclude the then-unnecessary vendor/ directory in the "Zip all files" step.
           dev: yes
 
-  variables:
-    needs: checkout
-    uses: dreitier/github-workflows/.github/workflows/variables.yml@main
-    with:
-      package: continuous-delivery
-      is_official_release: false
+      - name: Set variables
+        id: zip_variables
+        run: |
+          echo "::set-output name=zip_file::${ARTIFACT_NAME}.zip"
+        env:
+          ARTIFACT_NAME: ${{ needs.variables.outputs.artifact_name }}
 
-  package:
-    needs: variables
-    uses: dreitier/github-workflows/.github/workflows/package.yml@main
-    with:
-      artifact_name: ${{ needs.variables.outputs.artifact_name }}
-      version: ${{ needs.variables.outputs.version }}
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@master
+        with:
+          find: "@VERSION@"
+          replace: ${{ needs.variables.outputs.version }}
+
+      - name: ZIP workspace
+        id: zip
+        uses: schakko/action-zip-workspace@main
+        with:
+          filename: ${{ steps.zip_variables.outputs.zip_file }}
+          subdirectory: ${{ needs.variables.outputs.package }}
+
+      - name: Upload releases to GitHub
+        id: upload
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts:  ${{ steps.zip_variables.outputs.zip_file }}
+          allowUpdates: true
+          tag: ${{ inputs.version }}
+          token: ${{ secrets.GITHUB_TOKEN }}
