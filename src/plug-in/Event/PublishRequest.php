@@ -66,7 +66,7 @@ class PublishRequest
 		$args['scm'] = Scm::fromMap($content['scm'] ?? null);
 		$args['signatures'] = Signatures::fromMap($content['signatures'] ?? null);
 
-		$meta = !empty($content['meta']) ? $content['meta'] : "";
+		$meta = !empty($content['meta']) && is_array($content['meta']) ? $content['meta'] : null;
 		$args['meta'] = $meta;
 		$args['request'] = $request;
 
