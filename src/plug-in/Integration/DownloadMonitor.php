@@ -42,6 +42,14 @@ class DownloadMonitor
 	}
 
 	/**
+	 * Check if we are currently in an XHR request.
+	 * @return bool
+	 */
+	public static function isDoingXhr() {
+		return defined( 'DLM_DOING_XHR' ) && DLM_DOING_XHR;
+	}
+
+	/**
 	 * Redirect to AWS S3 with a signed request.
 	 *
 	 * @param $download
@@ -55,7 +63,14 @@ class DownloadMonitor
 			// we are in an XHR request and have to use the DLM-Redirect header;
 			$redirectTo = $this->s3ConfigurationManager->delegate($file_path)->createUrl();
 
-			header("DLM-Redirect: " . $redirectTo);
+			if (self::isDoingXhr()) {
+				header("DLM-Redirect: " . $redirectTo);
+			}
+			// if not doing any XHR, send a redirect
+			else {
+				header("Location: " . $redirectTo);
+			}
+
 			// also track the download
 			\DLM_Logging::get_instance()->log($download, $version, 'redirect', false, '');
 			exit;
