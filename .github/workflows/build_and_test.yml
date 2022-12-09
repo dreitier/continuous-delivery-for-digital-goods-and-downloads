@@ -1,9 +1,6 @@
 name: Run tests on branch commit
 on:
-  push:
-    branches:
-      - main
-      - develop
+  workflow_call:
 
 jobs:
   testing:
