@@ -1,8 +1,8 @@
 ﻿=== Continuous Delivery for Digital Goods and Downloads ===
 Contributors: dreitier,schakko,dreitierci
 Tags: download,software,continuous,delivery,package,automation,digital,goods
-Requires at least: 5.6
-Tested up to: 6.1
+Requires at least: 6.0
+Tested up to: 6.2
 Stable tag: @VERSION@
 License: The MIT License (MIT)
 License URI: https://opensource.org/licenses/MIT
