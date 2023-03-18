@@ -10,7 +10,11 @@ use Dreitier\WordPress\ContinuousDelivery\Vendor\Akeeba\Engine\Postproc\Connecto
  */
 class Configuration
 {
-	public function __construct(public readonly string $accessKey, public readonly string $secretAccessKey, public readonly string $region = 'eu-central-1')
+	public function __construct(
+		public readonly string $accessKey,
+		public readonly string $secretAccessKey,
+		public readonly string $region = 'eu-central-1'
+	)
 	{
 	}
 
